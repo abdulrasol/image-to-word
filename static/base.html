@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- include CSS Lib -->
+    <link rel="stylesheet" href="css/uikit.min.css"/>
+
+    <!-- include my CSS Lib -->
+    <link rel="stylesheet" href="css/styles.css"/>
+
+
+    <title>Loly, image text to word {{title}}</title>
+</head>
+<body>
+    <nav class="uk-navbar-container uk-margin" uk-navbar>
+        <div class="uk-navbar-left">
+    
+            <a class="uk-navbar-item uk-logo" href="#">
+                Loly, image text to word
+            </a>
+    
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a href="#">
+                        <span class="uk-icon uk-margin-small-right" uk-icon="icon: star"></span>
+                        Fe6atures
+                    </a>
+                </li>
+            </ul>
+    
+            <div class="uk-navbar-item">
+                <div>Some <a href="#">Link</a></div>
+            </div>
+    
+        </div>
+    </nav>
+
+    <!-- start body -->
+    <div class="uk-container">
+        <div class="uk-grid-collapse" uk-grid>
+
+            <div class="uk-width-1-6@l uk-width-2-6@m uk-width-1-4@s uk-padding-right">
+                <ul class="uk-list nav">
+
+                    <li >
+                        <a class="uk-link-heading {{home}}" href="/">Home</a>
+                    </li>
+                    <li>
+                        <a class="uk-link-heading {{About}}" href="/about">About</a>
+                    </li>
+                </ul>                
+            </div>
+            
+            <div class="hr">
+            </div>
+
+            <div class="uk-width-expand uk-padding uk-padding-remove-top">
+                {% if alert %}
+                <div class="uk-alert-{{alert.type}}" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>{{alert.msg}}</p>
+                </div>
+                {% endif %}
+
+                {% block main %}
+                {% endblock main %}
+            </div>
+
+        </div>
+        
+    </div>
+
+    <!-- include JS Lib -->
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+    <script src="js/jquery.js"></script>
+
+    <!-- include my JS  -->
+    <script src="js/plugin.js"></script>
+
+</body>
+</html>

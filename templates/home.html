@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    <form action="/editing" method="POST" enctype="multipart/form-data">
+        <fieldset class="uk-fieldset">
+
+            <legend class="uk-legend">Extract text from Images</legend>
+            
+            <div class="uk-margin uk-width-1-4">
+                <p class="uk-text-small uk-text-meta">
+                    Select Langauge 
+                </p>
+                <label class="uk-form-label" for="form-stacked-select">Langauge</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select" id="form-stacked-select" name="lang">
+                        {% for lang in langs %}
+                            <option value="{{lang}}">{{lang}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="uk-margin" uk-margin>
+                <p class="uk-text-small uk-text-meta">
+                    Select Image 
+                </p>
+                <div uk-form-custom="target: true">
+                    <input type="file" name="file">
+                    <input class="uk-input uk-form-width-medium" type="text" placeholder="Select file" disabled>
+                </div>
+            </div>
+
+            <div class="uk-margin uk-text-right" uk-margin>
+                <button type="submit" class="uk-button uk-button-primary">Next</button>
+            </div>
+
+        </fieldset>
+    </form>
+
+{% endblock main %}

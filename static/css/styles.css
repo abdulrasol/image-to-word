@@ -1,0 +1,27 @@
+.hr {
+    border: 0.5px solid #4e4b4b75
+}
+
+
+.active {
+    border-bottom: 2px solid #4e4b4b75;
+    margin-right: 10px;
+    margin-bottom: 17px;
+    transition: all .5s ease-in;
+    padding-bottom: 5px;
+}
+
+.nav li a:hover:after {
+    display: block;
+    background-color:#4e4b4b75 ;
+    height: 2px;
+    width: 100%;
+    margin-right: 10px;
+    margin-bottom: 17px;
+    transition: all .5s ease-in;
+    padding-bottom: 5px;
+}
+
+#add-device {
+    cursor: pointer;
+}
