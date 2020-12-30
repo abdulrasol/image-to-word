@@ -77,7 +77,7 @@ def home(msg = None, type = 'warning'):
 @app.route("/about")
 def about(title = None):
     
-    return render_template('watt.html', watt = 'active' )
+    return render_template('about.html', about = 'active' )
 
 
 """
@@ -115,7 +115,7 @@ def editing(title = None):
         os.remove(full_filename) 
         
         # return result
-        return render_template('editing.html', text=text, file = full_filename)
+        return render_template('editing.html', text=text)
     # return alert if file isnt upload
     return home('Should upload file first!')
 

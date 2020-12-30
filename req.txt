@@ -1,2 +1,3 @@
 requests
 ocrspace
+python-docx
