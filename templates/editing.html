@@ -11,12 +11,15 @@
             </div>
 
             <div class="uk-margin">
-                <textarea class="uk-textarea" rows="5" placeholder="Textarea">{{text}}</textarea>
+                <textarea class="uk-textarea" rows="5" placeholder="Textarea" name="text">{{text}}</textarea>
             </div>
 
             <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                <label><input class="uk-radio" type="radio" name="radio2" checked> word file</label>
-                <label><input class="uk-radio" type="radio" name="radio2"> txt file</label>
+                <select class="uk-select" id="form-stacked-select" name="type">
+                        <option value="doc">Word file</option>
+                        <option value="txt">txt file</option>
+                        <option value="pdf">PDF file</option>
+                </select>
             </div>
             <div class="uk-margin uk-text-right" uk-margin>
                 <a href="/" class="uk-button uk-button-default">Back</a>
