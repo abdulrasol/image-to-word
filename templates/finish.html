@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <p class="uk-text-meta">
+        {{text}}
+    </p>
+    <div class="uk-margin uk-text-right" uk-margin>
+        <button onclick="goBack()" class="uk-button uk-button-default">Back</button>
+        <a class="uk-button uk-button-primary" download href="{{file}}"> Download</a>
+    </div>
+    
+{% endblock main %}

@@ -2,7 +2,7 @@
 
 {% block main %}
 
-    <form method="POST" action="/download">
+    <form method="POST" action="/finish">
         <fieldset class="uk-fieldset">
 
             <legend class="uk-legend">Editing</legend>
@@ -22,9 +22,10 @@
                 </select>
             </div>
             <div class="uk-margin uk-text-right" uk-margin>
-                <a href="/" class="uk-button uk-button-default">Back</a>
+                <button onclick="goBack()" class="uk-button uk-button-default">Back</button>
                 <button type="submit" class="uk-button uk-button-primary">Next</button>
             </div>
+            <input type="false" name="is_download" hidden>
         </fieldset>
     </form>
 
