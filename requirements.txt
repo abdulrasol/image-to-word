@@ -1,0 +1,4 @@
+requests
+ocrspace
+python-docx
+flask

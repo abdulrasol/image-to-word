@@ -99,6 +99,9 @@ def editing(title = None):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+        # get file uploaded name
+        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
         try:
             # connect to API
             api = eval(f"ocrspace.API('e36c320cbb88957', ocrspace.Language.{request.form.get('lang')})")
@@ -107,12 +110,15 @@ def editing(title = None):
             text = api.ocr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         except Exception as e:
             return home(e)
-        
-        # get file uploaded name
-        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-        # remove file after process
-        os.remove(full_filename) 
+        finally:
+            # remove file after process
+            os.remove(full_filename)
+        
+        
+        
+
+         
         
         # return result
         return render_template('editing.html', text=text)
