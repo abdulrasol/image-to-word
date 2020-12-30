@@ -90,6 +90,7 @@ def editing(title = None):
         # get file
         file = request.files['file']
         
+        # check if file extention allowed
         if not(file and allowed_file(file.filename)):
             return home('PDF, PNG, JPG and JPEG files are allowed!')
         
