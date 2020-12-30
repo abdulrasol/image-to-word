@@ -9,6 +9,7 @@ from docx import Document
 
 UPLOAD_FOLDER = 'static/uploads'
 FILES_DIR = 'static/texts'
+FILENAME = ''
 
 
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
@@ -98,44 +99,51 @@ def editing(title = None):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-        # connect to API
-        api = eval(f"ocrspace.API('e36c320cbb88957', ocrspace.Language.{request.form.get('lang')})")
-        
-        # get text from server
-        text = api.ocr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        try:
+            # connect to API
+            api = eval(f"ocrspace.API('e36c320cbb88957', ocrspace.Language.{request.form.get('lang')})")
+            
+            # get text from server
+            text = api.ocr_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        except Exception as e:
+            return home(e)
         
         # get file uploaded name
         full_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
         # remove file after process
-        @after_this_request 
-        def remove_file(response): 
-            os.remove(full_filename) 
-            return response 
-
+        os.remove(full_filename) 
+        
         # return result
         return render_template('editing.html', text=text, file = full_filename)
     # return alert if file isnt upload
     return home('Should upload file first!')
 
 
-@app.route("/download", methods=["GET", "POST"])
-def download(title = None):
+# show final text and download file
+@app.route("/finish", methods=["GET", "POST"])
+def finish(title = None):
+    # get userID session
     session['id'] = request.cookies.get('session')
     if request.method == 'POST':
-        if request.form.get('type') == 'doc':
-            doc = Document()
-            doc.add_heading('Text extract from file', 0)
-            doc.add_paragraph(request.form.get('text'))
-            doc.save(os.path.join(app.config['FILES_DIR'], session['id']+'.docx'))
-        elif request.form.get('type') == 'pdf':
-            pass
-        else:
-            txt = open(os.path.join(app.config['FILES_DIR'], session['id']+'.txt'), 'w')
-            txt.write(request.form.get('text'))
-            txt.close
-    file = os.path.join(app.config['FILES_DIR'], session['id']+'.txt')
-    return render_template('dwonload.html', file = file)
+
+        # check if user want to download as docs or txt
+        if request.form.get('type') == 'doc':   # if doc
+            doc = Document()                                                                # create new Doc
+            doc.add_heading('Text extract from file', 0)                                    # add heading
+            doc.add_paragraph(request.form.get('text'))                                     # add text
+            doc.save(os.path.join(app.config['FILES_DIR'], session['id']+'.docx'))          # save file
+            FILENAME = '.docx'                                                              # save extecntion
+        else:       # if txt
+            txt = open(os.path.join(app.config['FILES_DIR'], session['id']+'.txt'), 'w')    # create new txt
+            txt.write(request.form.get('text'))                                             # add heading
+            txt.close                                                                       # save file 
+            FILENAME = '.txt'                                                               # save extecntion
+        FILENAME = os.path.join(app.config['FILES_DIR'], session['id']+ FILENAME)           # get file
+        return render_template('finish.html', file=FILENAME, text=request.form.get('text')) 
+
+    # return alert if file isnt upload
+    return home('Should upload file first!')
 
 def alert(text, type='primary'):
     return {
