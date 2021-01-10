@@ -16,9 +16,7 @@ Simple online app that detect text from image and extract it to word doc or text
 
 ###  I'm plan to add more features in next few month
 
-
- [Visit it from here](https://loly.pythonanywhere.com/) 
- [source code](https://github.com/abdulrasol/image-to-word/) 
+I have been removed demo link, it has been moved it to advanced project (forked from this) find it [here](https://loly.pythonanywhere.com/), [source code](https://github.com/abdulrasol/loly-ocr/). 
 
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
